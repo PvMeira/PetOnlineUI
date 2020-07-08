@@ -4,9 +4,11 @@ import PageDefault from "../../../../components/pageDefault";
 import { Formik } from "formik";
 import { Grid, TextField, Button } from "@material-ui/core";
 import { schema, schemaValidation } from "./formUtils";
+import { TextMaskCustomMoney } from "../../../../utils/Formater";
+import UploadField from "../../../../components/uploadField";
 
 const ItemEdit = ({ isEdit = true, match }) => {
-  const [item, setItem] = useState({});
+  const [item, setItem] = useState(schema);
   useEffect(() => {
     async function data() {
       if (isEdit) {
@@ -17,10 +19,13 @@ const ItemEdit = ({ isEdit = true, match }) => {
     data();
   }, []);
 
+  const handleSubmit = async () => {};
+
   return (
     <PageDefault title={isEdit ? "Edit item" : "Register Item"}>
       <Formik
-        initialValues={schema}
+        initialValues={item}
+        enableReinitialize={true}
         validationSchema={schemaValidation}
         validateOnBlur={true}
         validateOnChange={true}
@@ -34,6 +39,7 @@ const ItemEdit = ({ isEdit = true, match }) => {
           handleChange,
           handleBlur,
           handleSubmit,
+          setFieldValue,
         }) => (
           <form onSubmit={handleSubmit}>
             <div style={{ margin: "3% 20% 3% 20%" }}>
@@ -89,6 +95,9 @@ const ItemEdit = ({ isEdit = true, match }) => {
                     variant='outlined'
                     fullWidth
                     name={"value"}
+                    InputProps={{
+                      inputComponent: TextMaskCustomMoney,
+                    }}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.value}
@@ -111,6 +120,15 @@ const ItemEdit = ({ isEdit = true, match }) => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.quantity}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <UploadField
+                    label={"Image"}
+                    accept='.png,.jpeg'
+                    handleUpload={({ file }) => {
+                      setFieldValue("image", file);
+                    }}
                   />
                 </Grid>
               </Grid>

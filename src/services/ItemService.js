@@ -24,3 +24,12 @@ export const findById = (id) => {
     })
     .catch(console.error);
 };
+
+export const update = (id, body) => {
+  return api
+    .put(`${BASE_URL}/${id}`, JSON.stringify(body))
+    .then((response) => {
+      return response.data;
+    })
+    .catch(console.error);
+};

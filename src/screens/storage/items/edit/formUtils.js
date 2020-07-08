@@ -13,9 +13,7 @@ export const schemaValidation = () => {
     name: Yup.string()
       .required("Name is required.")
       .max(120, "The max lenght is 120 Characters"),
-    value: Yup.number()
-      .required("Value is required.")
-      .max(16, "Max values is XXXXXX"),
+    value: Yup.string().required("Value is required."),
     quantity: Yup.number().required("Quantity is required."),
   });
 };
