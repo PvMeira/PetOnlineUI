@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import Home from "./screens/home/index";
+import GenericNotFound from "./screens/notFound";
+import ItemList from "./screens/storage/items";
+import ItemEdit from "./screens/storage/items/edit";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Switch>
+        <Route exact path={"/"} component={Home} />
+        <Route exact path={"/storage"} component={ItemList} />
+        <Route
+          exact
+          path={"/storage/new"}
+          component={() => <ItemEdit isEdit={false} match={null} />}
+        />
+        <Route exact path={"/storage/:id"} component={ItemEdit} />
+        <Route path='/404' component={GenericNotFound} />
+        <Redirect to='/404' />
+      </Switch>
     </div>
   );
 }
