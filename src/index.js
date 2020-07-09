@@ -6,7 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store, persistor } from "./configuration/redux/store";
 import { PersistGate } from "redux-persist/integration/react";
-import MenuBar from "./components/menuBar";
+import MenuBar from "./components/global/menuBar";
 
 ReactDOM.render(
   <React.StrictMode>

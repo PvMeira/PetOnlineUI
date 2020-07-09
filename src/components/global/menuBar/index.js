@@ -13,7 +13,7 @@ import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import StorageIcon from "@material-ui/icons/Storage";
 import useStyles from "./styles";
 import { Link } from "react-router-dom";
-import { strings, colors } from "../../configuration/assets/";
+import { strings, colors } from "../../../configuration/assets";
 
 export default function MenuBar(props) {
   const classes = useStyles();

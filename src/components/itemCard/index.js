@@ -18,11 +18,18 @@ const useStyles = makeStyles({
   },
 });
 
-const ItemCard = ({ name, image, imageTitle, description, id }) => {
+const ItemCard = ({
+  name,
+  image,
+  imageTitle,
+  description,
+  id,
+  onClickCard,
+}) => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root} key={id}>
+    <Card className={classes.root} key={id} onClick={() => onClickCard(id)}>
       <CardActionArea>
         <CardMedia
           component='img'

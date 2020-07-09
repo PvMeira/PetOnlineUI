@@ -6,16 +6,24 @@ import { Grid, TextField, Button } from "@material-ui/core";
 import { schema, schemaValidation } from "./formUtils";
 import { TextMaskCustomMoney } from "../../../../utils/Formater";
 import UploadField from "../../../../components/uploadField";
-import { updateItem } from "../../../../services/ItemService";
+import { updateItem, listCategories } from "../../../../services/ItemService";
+import { useHistory, useParams } from "react-router-dom";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 
-const ItemEdit = ({ isEdit = true, match, history }) => {
+const ItemEdit = ({ isEdit = true }) => {
   const [item, setItem] = useState(schema);
+  const [categories, setCategories] = useState([]);
+  const history = useHistory();
+  const { id } = useParams();
+
   useEffect(() => {
     async function data() {
       if (isEdit) {
-        const response = await findById(match.params.id);
+        const response = await findById(id);
         setItem(response);
       }
+      const responseCategories = await listCategories();
+      setCategories(responseCategories);
     }
     data();
   }, []);
@@ -144,13 +152,31 @@ const ItemEdit = ({ isEdit = true, match, history }) => {
                     value={values.quantity}
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={6}>
                   <UploadField
                     label={"Image"}
                     accept='.png,.jpeg'
                     handleUpload={({ file }) => {
                       setFieldValue("image", file);
                     }}
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <Autocomplete
+                    id='categories'
+                    options={categories}
+                    getOptionLabel={(option) => option.name}
+                    onChange={(event, newValue) => {
+                      setFieldValue("category", newValue);
+                    }}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        value={values.category}
+                        label='Combo box'
+                        variant='outlined'
+                      />
+                    )}
                   />
                 </Grid>
               </Grid>
@@ -161,8 +187,12 @@ const ItemEdit = ({ isEdit = true, match, history }) => {
                 style={{ textAlign: "center" }}
               >
                 <Grid item xs={6}>
-                  <Button variant='outlined' size='large' color='secondary'>
-                    {" "}
+                  <Button
+                    variant='outlined'
+                    size='large'
+                    color='secondary'
+                    onClick={() => history.goBack()}
+                  >
                     Back
                   </Button>
                 </Grid>

@@ -14,7 +14,7 @@ function App() {
         <Route
           exact
           path={"/storage/new"}
-          component={() => <ItemEdit isEdit={false} match={null} />}
+          component={() => <ItemEdit isEdit={false} />}
         />
         <Route exact path={"/storage/:id"} component={ItemEdit} />
         <Route path='/404' component={GenericNotFound} />
