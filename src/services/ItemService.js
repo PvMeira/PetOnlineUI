@@ -25,7 +25,9 @@ export const findById = (id) => {
     .catch(console.error);
 };
 
-export const update = (id, body) => {
+export const updateItem = (id, body) => {
+  console.log(id);
+  console.log(body);
   return api
     .put(`${BASE_URL}/${id}`, JSON.stringify(body))
     .then((response) => {

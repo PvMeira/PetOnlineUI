@@ -4,7 +4,6 @@ import ItemListFilter from "./filter";
 import ItemCard from "../../../components/itemCard";
 import { Divider, Grid } from "@material-ui/core";
 import { search } from "../../../services/ItemService";
-import Pagination from "@material-ui/lab/Pagination";
 import PaginationHelper from "../../../components/pagination";
 
 const ItemList = () => {

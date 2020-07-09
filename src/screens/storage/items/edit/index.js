@@ -6,8 +6,9 @@ import { Grid, TextField, Button } from "@material-ui/core";
 import { schema, schemaValidation } from "./formUtils";
 import { TextMaskCustomMoney } from "../../../../utils/Formater";
 import UploadField from "../../../../components/uploadField";
+import { updateItem } from "../../../../services/ItemService";
 
-const ItemEdit = ({ isEdit = true, match }) => {
+const ItemEdit = ({ isEdit = true, match, history }) => {
   const [item, setItem] = useState(schema);
   useEffect(() => {
     async function data() {
@@ -19,7 +20,27 @@ const ItemEdit = ({ isEdit = true, match }) => {
     data();
   }, []);
 
-  const handleSubmit = async () => {};
+  const handleSubmitForm = async ({
+    id,
+    name,
+    description,
+    value,
+    quantity,
+    image,
+  }) => {
+    const newValuenew = String(value).replace(",", "");
+    if (isEdit) {
+      await updateItem(id, {
+        id,
+        name,
+        description,
+        value: newValuenew,
+        quantity,
+        image,
+      });
+      history.goBack();
+    }
+  };
 
   return (
     <PageDefault title={isEdit ? "Edit item" : "Register Item"}>
@@ -28,9 +49,10 @@ const ItemEdit = ({ isEdit = true, match }) => {
         enableReinitialize={true}
         validationSchema={schemaValidation}
         validateOnBlur={true}
-        validateOnChange={true}
         validateOnMount={false}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => {
+          handleSubmitForm(values);
+        }}
       >
         {({
           values,
