@@ -6,6 +6,7 @@ export const schema = {
   value: 0,
   quantity: 0,
   image: "",
+  category: { type: 1, name: "Toys" },
 };
 
 export const schemaValidation = () => {

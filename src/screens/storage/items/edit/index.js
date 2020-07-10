@@ -9,6 +9,7 @@ import UploadField from "../../../../components/uploadField";
 import { updateItem, listCategories } from "../../../../services/ItemService";
 import { useHistory, useParams } from "react-router-dom";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import { ImageContainer } from "./styles";
 
 const ItemEdit = ({ isEdit = true }) => {
   const [item, setItem] = useState(schema);
@@ -35,18 +36,24 @@ const ItemEdit = ({ isEdit = true }) => {
     value,
     quantity,
     image,
+    category,
   }) => {
     const newValuenew = String(value).replace(",", "");
     if (isEdit) {
-      await updateItem(id, {
-        id,
-        name,
-        description,
-        value: newValuenew,
-        quantity,
-        image,
-      });
-      history.goBack();
+      try {
+        await updateItem(id, {
+          id,
+          name,
+          description,
+          value: newValuenew,
+          quantity,
+          image,
+          category,
+        });
+        history.goBack();
+      } catch (error) {
+        alert(error);
+      }
     }
   };
 
@@ -80,7 +87,7 @@ const ItemEdit = ({ isEdit = true }) => {
                 spacing={2}
                 style={{ marginBottom: "5%" }}
               >
-                <Grid item xs={12}>
+                <Grid item xs={6}>
                   <TextField
                     error={errors.name && touched.name && errors.name}
                     helperText={errors.name && touched.name && errors.name}
@@ -92,6 +99,26 @@ const ItemEdit = ({ isEdit = true }) => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.name}
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <Autocomplete
+                    id='categories'
+                    options={categories}
+                    getOptionLabel={(option) => option.name}
+                    value={values.category}
+                    inputValue={values.category.name}
+                    onChange={(event, newValue) => {
+                      console.log(newValue);
+                      setFieldValue("category", newValue);
+                    }}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label='Categories'
+                        variant='outlined'
+                      />
+                    )}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -162,22 +189,9 @@ const ItemEdit = ({ isEdit = true }) => {
                   />
                 </Grid>
                 <Grid item xs={6}>
-                  <Autocomplete
-                    id='categories'
-                    options={categories}
-                    getOptionLabel={(option) => option.name}
-                    onChange={(event, newValue) => {
-                      setFieldValue("category", newValue);
-                    }}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        value={values.category}
-                        label='Combo box'
-                        variant='outlined'
-                      />
-                    )}
-                  />
+                  <ImageContainer>
+                    <img src={values.image} alt={values.name} />
+                  </ImageContainer>
                 </Grid>
               </Grid>
               <Grid

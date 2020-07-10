@@ -12,6 +12,19 @@ const ItemList = () => {
   const [filter, setFilter] = useState({ name: "", description: "" });
   const history = useHistory();
 
+  const arrayButton = [
+    {
+      label: "Delete",
+      color: "secondary",
+      function: (id) => onClickCard(id),
+    },
+    {
+      label: "Edit",
+      color: "primary",
+      function: (id) => onClickCard(id),
+    },
+  ];
+
   const searchItems = async (page, values) => {
     setFilter(values);
     const { name, description } = values;
@@ -52,7 +65,14 @@ const ItemList = () => {
             key={item.id}
             style={{ marginBottom: "16px" }}
           >
-            <ItemCard {...item} imageTitle='image' onClickCard={onClickCard} />
+            <ItemCard
+              image={item.image}
+              title={item.name}
+              description={item.description}
+              id={item.id}
+              buttonArray={arrayButton}
+              onClickCard={onClickCard}
+            />
           </Grid>
         ))}
       </Grid>
