@@ -6,11 +6,14 @@ import { Divider, Grid } from "@material-ui/core";
 import { search } from "../../../services/ItemService";
 import PaginationHelper from "../../../components/pagination";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { toggleLoading } from "../../../configuration/redux/reducers/application/application-actions";
 
 const ItemList = () => {
   const [items, setItems] = useState({ content: [], totalPages: 0 });
   const [filter, setFilter] = useState({ name: "", description: "" });
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const arrayButton = [
     {
@@ -26,10 +29,12 @@ const ItemList = () => {
   ];
 
   const searchItems = async (page, values) => {
+    dispatch(toggleLoading());
     setFilter(values);
     const { name, description } = values;
     const response = await search(page, 4, name);
     setItems(response);
+    dispatch(toggleLoading());
   };
 
   const handlePaginationChange = (event, value) => {
