@@ -53,7 +53,9 @@ const ItemEdit = ({ isEdit = true }) => {
           image,
           category,
         });
-        dispatch(toggleSuccessMessage());
+        dispatch(
+          toggleSuccessMessage(`The item ${name} was successful edited.`)
+        );
         history.push("/storage");
       } catch (error) {}
     }
