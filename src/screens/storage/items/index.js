@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PageDefault from "../../../components/pageDefault";
 import ItemListFilter from "./filter";
 import ItemCard from "../../../components/itemCard";
@@ -14,6 +14,10 @@ const ItemList = () => {
   const [filter, setFilter] = useState({ name: "", description: "" });
   const history = useHistory();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    searchItems(1, filter);
+  }, []);
 
   const arrayButton = [
     {

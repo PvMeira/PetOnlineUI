@@ -10,11 +10,14 @@ import { updateItem, listCategories } from "../../../../services/ItemService";
 import { useHistory, useParams } from "react-router-dom";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { ImageContainer } from "./styles";
+import { useDispatch } from "react-redux";
+import { toggleSuccessMessage } from "../../../../configuration/redux/reducers/application/application-actions";
 
 const ItemEdit = ({ isEdit = true }) => {
   const [item, setItem] = useState(schema);
   const [categories, setCategories] = useState([]);
   const history = useHistory();
+  const dispatch = useDispatch();
   const { id } = useParams();
 
   useEffect(() => {
@@ -50,10 +53,9 @@ const ItemEdit = ({ isEdit = true }) => {
           image,
           category,
         });
-        history.goBack();
-      } catch (error) {
-        alert(error);
-      }
+        dispatch(toggleSuccessMessage());
+        history.push("/storage");
+      } catch (error) {}
     }
   };
 
@@ -205,7 +207,7 @@ const ItemEdit = ({ isEdit = true }) => {
                     variant='outlined'
                     size='large'
                     color='secondary'
-                    onClick={() => history.goBack()}
+                    onClick={() => history.push("/storage")}
                   >
                     Back
                   </Button>

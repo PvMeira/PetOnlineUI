@@ -8,6 +8,7 @@ import { store, persistor } from "./configuration/redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import MenuBar from "./components/global/menuBar";
 import Loading from "./components/global/loading";
+import SnackBar from "./components/global/snackBar";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -15,6 +16,7 @@ ReactDOM.render(
       <BrowserRouter>
         <PersistGate persistor={persistor}>
           <Loading />
+          <SnackBar />
           <MenuBar>
             <App />
           </MenuBar>
