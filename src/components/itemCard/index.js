@@ -52,19 +52,21 @@ const ItemCard = ({
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions style={{ justifyContent: "space-between" }}>
-        {buttonArray.map((button) => (
-          <Button
-            disableElevation
-            size='medium'
-            variant='contained'
-            color={button.color}
-            onClick={() => button.function(id)}
-          >
-            {button.label}
-          </Button>
-        ))}
-      </CardActions>
+      <div>
+        <CardActions style={{ justifyContent: "space-between" }}>
+          {buttonArray.map((button) => (
+            <Button
+              disableElevation
+              size='medium'
+              variant='contained'
+              color={button.color}
+              onClick={() => button.function(id)}
+            >
+              {button.label}
+            </Button>
+          ))}
+        </CardActions>
+      </div>
     </Card>
   );
 };
