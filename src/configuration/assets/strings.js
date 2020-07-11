@@ -31,6 +31,7 @@ const strings = {
     home: "Home",
     sales: "Sales",
     storage: "Storage",
+    services: "Services",
   },
 };
 

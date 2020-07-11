@@ -29,6 +29,31 @@ export function TextMaskCustomMoney(props) {
   );
 }
 
+const numberFormatBR = new Intl.NumberFormat("pt-br", {
+  style: "currency",
+  currency: "BRL",
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
+const numberFormatUS = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
+
+export const formatCurrency = (value, type) => {
+  switch (type) {
+    case "pt-BR":
+      return numberFormatBR.format(value);
+    case "en-US":
+      return numberFormatUS.format(value);
+
+    default:
+      return numberFormatUS.format(value);
+  }
+};
+
 export function bigNumberCurrencyFormatterBr(value) {
   if (!Number(value)) return "";
 
