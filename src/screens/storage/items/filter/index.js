@@ -2,8 +2,12 @@ import React from "react";
 import { Grid, TextField, Button } from "@material-ui/core";
 import { Formik } from "formik";
 import { initialSchema } from "../formUtils";
+import { useHistory } from "react-router-dom";
+import { strings } from "../../../../configuration/assets";
 
 const ItemListFilter = ({ onSubmitFunction }) => {
+  const history = useHistory();
+
   return (
     <Formik
       initialValues={initialSchema}
@@ -43,7 +47,7 @@ const ItemListFilter = ({ onSubmitFunction }) => {
                   variant='outlined'
                   name={"description"}
                   inputProps={{
-                    maxLength: 300,
+                    maxLength: 120,
                   }}
                   fullWidth
                   onChange={handleChange}
@@ -52,18 +56,34 @@ const ItemListFilter = ({ onSubmitFunction }) => {
                 />
               </Grid>
             </Grid>
-            <Grid container direction='row' justify='center' spacing={2}>
-              <Grid item xs={12} style={{ textAlign: "center" }}>
-                <Button variant='outlined' size='large' color='secondary'>
-                  Clear
-                </Button>
+            <Grid container direction='row' spacing={2}>
+              <Grid item xs={6}>
                 <Button
                   variant='outlined'
                   size='large'
                   color='primary'
+                  style={{ margin: "0px 5px 5px 0px " }}
                   type='submit'
                 >
-                  Search
+                  {strings.defualtButtons.search}
+                </Button>
+                <Button
+                  variant='outlined'
+                  size='large'
+                  color='secondary'
+                  style={{ margin: "0px 5px 5px 0px " }}
+                >
+                  {strings.defualtButtons.clear}
+                </Button>
+              </Grid>
+              <Grid item xs={6} style={{ textAlign: "end" }}>
+                <Button
+                  variant='contained'
+                  size='large'
+                  color='secondary'
+                  onClick={() => history.push(`/storage/new`)}
+                >
+                  {strings.defualtButtons.new}
                 </Button>
               </Grid>
             </Grid>

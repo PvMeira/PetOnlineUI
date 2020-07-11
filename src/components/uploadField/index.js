@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { TextField, InputAdornment } from "@material-ui/core";
-import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
+import PhotoCamera from "@material-ui/icons/PhotoCamera";
 
 const UploadField = (props) => {
   const { label, accept, handleUpload, type } = props;
@@ -49,10 +49,9 @@ const UploadField = (props) => {
         error={props.error}
         helperText={props.helperText}
         InputProps={{
-          style: { cursor: "pointer" },
           endAdornment: (
             <InputAdornment position='end'>
-              <CloudDownloadIcon />
+              <PhotoCamera />
             </InputAdornment>
           ),
         }}

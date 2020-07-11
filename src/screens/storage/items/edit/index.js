@@ -6,12 +6,20 @@ import { Grid, TextField, Button } from "@material-ui/core";
 import { schema, schemaValidation } from "./formUtils";
 import { TextMaskCustomMoney } from "../../../../utils/Formater";
 import UploadField from "../../../../components/uploadField";
-import { updateItem, listCategories } from "../../../../services/ItemService";
+import {
+  updateItem,
+  listCategories,
+  save,
+} from "../../../../services/ItemService";
 import { useHistory, useParams } from "react-router-dom";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import { ImageContainer } from "./styles";
+import { ImageContainer, Image, FormContainer } from "./styles";
 import { useDispatch } from "react-redux";
-import { toggleSuccessMessage } from "../../../../configuration/redux/reducers/application/application-actions";
+import {
+  toggleSuccessMessage,
+  toggleErrorMessage,
+} from "../../../../configuration/redux/reducers/application/application-actions";
+import { strings } from "../../../../configuration/assets";
 
 const ItemEdit = ({ isEdit = true }) => {
   const [item, setItem] = useState(schema);
@@ -32,37 +40,55 @@ const ItemEdit = ({ isEdit = true }) => {
     data();
   }, []);
 
-  const handleSubmitForm = async ({
-    id,
-    name,
-    description,
-    value,
-    quantity,
-    image,
-    category,
-  }) => {
+  const handleSubmitForm = async (values) => {
+    const { id, name, description, value, quantity, image, category } = values;
     const newValuenew = String(value).replace(",", "");
     if (isEdit) {
-      try {
-        await updateItem(id, {
-          id,
-          name,
-          description,
-          value: newValuenew,
-          quantity,
-          image,
-          category,
+      await updateItem(id, {
+        id,
+        name,
+        description,
+        value: newValuenew,
+        quantity,
+        image,
+        category,
+      })
+        .then((response) => {
+          dispatch(
+            toggleSuccessMessage(`The item ${name} was successful edited.`)
+          );
+          history.push("/storage");
+        })
+        .catch((error) => {
+          dispatch(toggleErrorMessage(strings.defaultMessages.error));
         });
-        dispatch(
-          toggleSuccessMessage(`The item ${name} was successful edited.`)
-        );
-        history.push("/storage");
-      } catch (error) {}
+    } else {
+      await save({
+        name,
+        description,
+        value: newValuenew,
+        quantity,
+        image,
+        category,
+      })
+        .then((response) => {
+          dispatch(toggleSuccessMessage(strings.defaultMessages.success));
+          history.push("/storage");
+        })
+        .catch((error) => {
+          dispatch(toggleErrorMessage(strings.defaultMessages.error));
+        });
     }
   };
 
   return (
-    <PageDefault title={isEdit ? "Edit item" : "Register Item"}>
+    <PageDefault
+      title={
+        isEdit
+          ? strings.screens.items.titleEdit
+          : strings.screens.items.titleNew
+      }
+    >
       <Formik
         initialValues={item}
         enableReinitialize={true}
@@ -83,7 +109,7 @@ const ItemEdit = ({ isEdit = true }) => {
           setFieldValue,
         }) => (
           <form onSubmit={handleSubmit}>
-            <div style={{ margin: "3% 20% 3% 20%" }}>
+            <FormContainer>
               <Grid
                 container
                 direction='row'
@@ -96,7 +122,7 @@ const ItemEdit = ({ isEdit = true }) => {
                     error={errors.name && touched.name && errors.name}
                     helperText={errors.name && touched.name && errors.name}
                     id='name'
-                    label='Name'
+                    label={strings.screens.items.name}
                     variant='outlined'
                     fullWidth
                     name={"name"}
@@ -119,7 +145,7 @@ const ItemEdit = ({ isEdit = true }) => {
                     renderInput={(params) => (
                       <TextField
                         {...params}
-                        label='Categories'
+                        label={strings.screens.items.categoory}
                         variant='outlined'
                       />
                     )}
@@ -138,7 +164,7 @@ const ItemEdit = ({ isEdit = true }) => {
                       errors.description
                     }
                     id='description'
-                    label='Description'
+                    label={strings.screens.items.description}
                     variant='outlined'
                     fullWidth
                     name={"description"}
@@ -152,7 +178,7 @@ const ItemEdit = ({ isEdit = true }) => {
                     error={errors.value && touched.value && errors.value}
                     helperText={errors.value && touched.value && errors.value}
                     id='value'
-                    label='Value'
+                    label={strings.screens.items.value}
                     variant='outlined'
                     fullWidth
                     name={"value"}
@@ -174,7 +200,7 @@ const ItemEdit = ({ isEdit = true }) => {
                     }
                     id='quantity'
                     type='number'
-                    label='Quantity'
+                    label={strings.screens.items.quantity}
                     variant='outlined'
                     fullWidth
                     name={"quantity"}
@@ -185,7 +211,7 @@ const ItemEdit = ({ isEdit = true }) => {
                 </Grid>
                 <Grid item xs={6}>
                   <UploadField
-                    label={"Image"}
+                    label={strings.screens.items.image}
                     accept='.png,.jpeg'
                     handleUpload={({ file }) => {
                       setFieldValue("image", file);
@@ -194,7 +220,7 @@ const ItemEdit = ({ isEdit = true }) => {
                 </Grid>
                 <Grid item xs={6}>
                   <ImageContainer>
-                    <img src={values.image} alt={values.name} />
+                    <Image src={values.image} alt={values.name} />
                   </ImageContainer>
                 </Grid>
               </Grid>
@@ -211,7 +237,7 @@ const ItemEdit = ({ isEdit = true }) => {
                     color='secondary'
                     onClick={() => history.push("/storage")}
                   >
-                    Back
+                    {strings.defualtButtons.back}
                   </Button>
                 </Grid>
                 <Grid item xs={6}>
@@ -221,11 +247,11 @@ const ItemEdit = ({ isEdit = true }) => {
                     color='primary'
                     type='submit'
                   >
-                    Save
+                    {strings.defualtButtons.save}
                   </Button>
                 </Grid>
               </Grid>
-            </div>
+            </FormContainer>
           </form>
         )}
       </Formik>

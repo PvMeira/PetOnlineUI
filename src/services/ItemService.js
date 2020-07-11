@@ -36,12 +36,9 @@ export const listCategories = () => {
 };
 
 export const updateItem = (id, body) => {
-  console.log(id);
-  console.log(body);
-  return api
-    .put(`${BASE_URL}/${id}`, JSON.stringify(body))
-    .then((response) => {
-      return response.data;
-    })
-    .catch(console.error);
+  return api.put(`${BASE_URL}/${id}`, JSON.stringify(body));
+};
+
+export const save = (body) => {
+  return api.post(`${BASE_URL}`, JSON.stringify(body));
 };

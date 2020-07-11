@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import PageDefault from "../../../components/pageDefault";
 import ItemListFilter from "./filter";
-import ItemCard from "../../../components/itemCard";
-import { Divider, Grid } from "@material-ui/core";
+import ApiCard from "../../../components/global/card";
+import { Divider, Grid, Button } from "@material-ui/core";
 import { search } from "../../../services/ItemService";
 import PaginationHelper from "../../../components/pagination";
 import { useHistory } from "react-router-dom";
@@ -18,19 +18,6 @@ const ItemList = () => {
   useEffect(() => {
     searchItems(1, filter);
   }, []);
-
-  const arrayButton = [
-    {
-      label: "Delete",
-      color: "secondary",
-      function: (id) => onClickCard(id),
-    },
-    {
-      label: "Edit",
-      color: "primary",
-      function: (id) => onClickCard(id),
-    },
-  ];
 
   const searchItems = async (page, values) => {
     dispatch(toggleLoading());
@@ -74,12 +61,11 @@ const ItemList = () => {
             key={item.id}
             style={{ marginBottom: "16px" }}
           >
-            <ItemCard
+            <ApiCard
               image={item.image}
               title={item.name}
               description={item.description}
               id={item.id}
-              buttonArray={arrayButton}
               onClickCard={onClickCard}
             />
           </Grid>
