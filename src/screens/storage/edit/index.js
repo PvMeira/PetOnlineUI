@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { findById } from "../../../../services/ItemService";
-import PageDefault from "../../../../components/pageDefault";
+import { findById } from "../../../services/ItemService";
+import PageDefault from "../../../components/pageDefault";
 import { Formik } from "formik";
 import { Grid, TextField, Button } from "@material-ui/core";
 import { schema, schemaValidation } from "./formUtils";
-import { TextMaskCustomMoney } from "../../../../utils/Formater";
-import UploadField from "../../../../components/uploadField";
+import { TextMaskCustomMoney } from "../../../utils/Formater";
+import UploadField from "../../../components/uploadField";
 import {
   updateItem,
   listCategories,
   save,
-} from "../../../../services/ItemService";
+} from "../../../services/ItemService";
 import { useHistory, useParams } from "react-router-dom";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { ImageContainer, Image, FormContainer } from "./styles";
@@ -18,8 +18,8 @@ import { useDispatch } from "react-redux";
 import {
   toggleSuccessMessage,
   toggleErrorMessage,
-} from "../../../../configuration/redux/reducers/application/application-actions";
-import { strings } from "../../../../configuration/assets";
+} from "../../../configuration/redux/reducers/application/application-actions";
+import { strings } from "../../../configuration/assets";
 
 const ItemEdit = ({ isEdit = true }) => {
   const [item, setItem] = useState(schema);

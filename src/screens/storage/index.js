@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import PageDefault from "../../../components/pageDefault";
+import PageDefault from "../../components/pageDefault";
 import ItemListFilter from "./filter";
-import ApiCard from "../../../components/global/card";
+import ApiCard from "../../components/global/card";
 import { Divider, Grid } from "@material-ui/core";
-import { search } from "../../../services/ItemService";
-import PaginationHelper from "../../../components/pagination";
+import { search } from "../../services/ItemService";
+import PaginationHelper from "../../components/pagination";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { toggleLoading } from "../../../configuration/redux/reducers/application/application-actions";
+import { toggleLoading } from "../../configuration/redux/reducers/application/application-actions";
 
 const ItemList = () => {
   const [items, setItems] = useState({ content: [], totalPages: 0 });

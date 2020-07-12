@@ -3,7 +3,7 @@ import { Grid, TextField, Button } from "@material-ui/core";
 import { Formik } from "formik";
 import { initialSchema } from "../formUtils";
 import { useHistory } from "react-router-dom";
-import { strings } from "../../../../configuration/assets";
+import { strings } from "../../../configuration/assets";
 
 const ItemListFilter = ({ onSubmitFunction }) => {
   const history = useHistory();
