@@ -65,7 +65,7 @@ const ServicesListFilter = ({ onSubmitFunction }) => {
                   variant='contained'
                   size='large'
                   color='secondary'
-                  onClick={() => history.push(`/storage/new`)}
+                  onClick={() => history.push(`/services/new`)}
                 >
                   {strings.defualtButtons.new}
                 </Button>

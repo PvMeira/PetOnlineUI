@@ -10,11 +10,13 @@ import ApiToolTip from "../../components/global/toolTip/";
 import { toggleLoading } from "../../configuration/redux/reducers/application/application-actions";
 import { useDispatch } from "react-redux";
 import PaginationHelper from "../../components/pagination";
+import { useHistory } from "react-router-dom";
 
 const ServicesList = () => {
   const [services, setServices] = useState({ content: [], totalPages: 0 });
   const [name, setName] = useState("");
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const searchServices = async (page, values) => {
     dispatch(toggleLoading());
@@ -81,10 +83,14 @@ const ServicesList = () => {
       options: {
         filter: false,
         sort: false,
-        customBodyRender: (value, tableMeta) => () => (
+        customBodyRender: (value, tableMeta) => (
           <ApiToolTip text='Edit this Service'>
             <IconButton
-              onClick={() => console.log("teste", services[tableMeta.rowIndex])}
+              onClick={() =>
+                history.push(
+                  `services/${services.content[tableMeta.rowIndex].id}`
+                )
+              }
             >
               <EditIcon />
             </IconButton>

@@ -25,6 +25,14 @@ const strings = {
       quantity: "Quantity",
       image: "Image",
     },
+    services: {
+      titleEdit: "Edit Service",
+      titleNew: "Register Service",
+      name: "Name",
+      description: "Description",
+      value: "Value",
+      isActive: "Active?",
+    },
   },
   menu: {
     appName: "Pet Online V1",

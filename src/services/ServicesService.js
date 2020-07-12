@@ -17,7 +17,7 @@ export const findById = (id) => {
   return api.get(`${BASE_URL}/${id}`);
 };
 
-export const updateItem = (id, body) => {
+export const update = (id, body) => {
   return api.put(`${BASE_URL}/${id}`, JSON.stringify(body));
 };
 
