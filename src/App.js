@@ -1,28 +1,30 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
-import Home from "./screens/home/index";
-import GenericNotFound from "./screens/notFound";
-import ItemList from "./screens/storage/items";
-import ItemEdit from "./screens/storage/items/edit";
-import ServicesList from "./screens/services";
+import ApiRoute from "./configuration/core/route";
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store, persistor } from "./configuration/redux/store";
+import { PersistGate } from "redux-persist/integration/react";
+import MenuBar from "./components/global/menuBar";
+import Loading from "./components/global/loading";
+import SnackBar from "./components/global/snackBar";
+import { MuiThemeProvider } from "@material-ui/core/styles";
+import theme from "./configuration/core/style";
 
 function App() {
   return (
-    <div>
-      <Switch>
-        <Route exact path={"/"} component={Home} />
-        <Route exact path={"/storage"} component={ItemList} />
-        <Route
-          exact
-          path={"/storage/new"}
-          component={() => <ItemEdit isEdit={false} />}
-        />
-        <Route exact path={"/storage/:id"} component={ItemEdit} />
-        <Route exact path={"/services"} component={ServicesList} />
-        <Route path='/404' component={GenericNotFound} />
-        <Redirect to='/404' />
-      </Switch>
-    </div>
+    <Provider store={store}>
+      <MuiThemeProvider theme={theme}>
+        <BrowserRouter>
+          <PersistGate persistor={persistor}>
+            <Loading />
+            <SnackBar />
+            <MenuBar>
+              <ApiRoute />
+            </MenuBar>
+          </PersistGate>
+        </BrowserRouter>
+      </MuiThemeProvider>
+    </Provider>
   );
 }
 

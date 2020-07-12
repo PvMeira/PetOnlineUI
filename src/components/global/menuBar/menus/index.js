@@ -83,9 +83,12 @@ export default function MenuList() {
               unmountOnExit
               key={`colapse-${index}`}
             >
-              <List component='div' disablePadding>
+              <List component='div' disablePadding key={`ddd-${index}`}>
                 {menuItem.subMenus.map((subMenuItem, index) => (
-                  <CustomLink key={`subMenu-${index}`} to={subMenuItem.url}>
+                  <CustomLink
+                    key={`subMenu-${index}-${subMenuItem.url}`}
+                    to={subMenuItem.url}
+                  >
                     <ListItemContainer>
                       <ListItemIconPrimary>
                         {subMenuItem.icon}
@@ -98,7 +101,7 @@ export default function MenuList() {
             </Collapse>
           </>
         ) : (
-          <CustomLink to={menuItem.url}>
+          <CustomLink to={menuItem.url} key={`Custom-Link--${index}`}>
             <ListItem button>
               <ListItemIconPrimary>{menuItem.icon}</ListItemIconPrimary>
               <ListItemText primary={menuItem.name} />

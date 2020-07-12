@@ -9,7 +9,12 @@ const PaginationHelper = ({
   handlePaginationChange,
 }) => {
   return (
-    <Grid container direction='column' alignContent='center'>
+    <Grid
+      container
+      direction='column'
+      alignContent='center'
+      style={{ marginTop: "5px" }}
+    >
       <Grid item xs={12}>
         {show ? (
           <Pagination

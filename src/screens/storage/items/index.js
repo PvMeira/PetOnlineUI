@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PageDefault from "../../../components/pageDefault";
 import ItemListFilter from "./filter";
 import ApiCard from "../../../components/global/card";
-import { Divider, Grid, Button } from "@material-ui/core";
+import { Divider, Grid } from "@material-ui/core";
 import { search } from "../../../services/ItemService";
 import PaginationHelper from "../../../components/pagination";
 import { useHistory } from "react-router-dom";
@@ -22,7 +22,7 @@ const ItemList = () => {
   const searchItems = async (page, values) => {
     dispatch(toggleLoading());
     setFilter(values);
-    const { name, description } = values;
+    const { name } = values;
     const response = await search(page, 4, name);
     setItems(response);
     dispatch(toggleLoading());

@@ -56,7 +56,7 @@ const SnackBar = () => {
         open={errorMessageConst.status}
         autoHideDuration={6000}
         onClose={handleClose}
-        key='warning-Snackbar'
+        key='error-Snackbar'
       >
         <Alert onClose={handleClose} severity='error'>
           {errorMessageConst.message}
