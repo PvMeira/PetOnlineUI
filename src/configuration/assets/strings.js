@@ -15,6 +15,16 @@ const strings = {
     new: "New",
   },
   screens: {
+    login: {
+      signIn: "Sign in",
+      email: "Email Address",
+      password: "Password",
+      rememberMe: "Remember me",
+      coopyright: {
+        cr: "Copyright © ",
+        company: "PetOnline",
+      },
+    },
     items: {
       titleEdit: "Edit item",
       titleNew: "Register Item",

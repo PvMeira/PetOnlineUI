@@ -6,10 +6,12 @@ import ServicesList from "../../../screens/services";
 import Home from "../../../screens/home";
 import ItemList from "../../../screens/storage";
 import ServicesEdit from "../../../screens/services/edit";
+import Login from "../../../screens/login";
 
 const ApiRoute = () => {
   return (
     <Switch>
+      <Route exact path={"/login"} component={Login} />
       <Route exact path={"/"} component={Home} />
       <Route exact path={"/storage"} component={ItemList} />
       <Route
