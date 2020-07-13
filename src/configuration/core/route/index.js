@@ -7,26 +7,27 @@ import Home from "../../../screens/home";
 import ItemList from "../../../screens/storage";
 import ServicesEdit from "../../../screens/services/edit";
 import Login from "../../../screens/login";
+import ProtectedRoute from "../../../components/global/protectedRoute";
 
 const ApiRoute = () => {
   return (
     <Switch>
       <Route exact path={"/login"} component={Login} />
-      <Route exact path={"/"} component={Home} />
-      <Route exact path={"/storage"} component={ItemList} />
-      <Route
+      <ProtectedRoute exact path={"/"} component={Home} />
+      <ProtectedRoute exact path={"/storage"} component={ItemList} />
+      <ProtectedRoute
         exact
         path={"/storage/new"}
         component={() => <ItemEdit isEdit={false} />}
       />
-      <Route exact path={"/storage/:id"} component={ItemEdit} />
-      <Route exact path={"/services"} component={ServicesList} />
-      <Route
+      <ProtectedRoute exact path={"/storage/:id"} component={ItemEdit} />
+      <ProtectedRoute exact path={"/services"} component={ServicesList} />
+      <ProtectedRoute
         exact
         path={"/services/new"}
         component={() => <ServicesEdit isEdit={false} />}
       />
-      <Route exact path={"/services/:id"} component={ServicesEdit} />
+      <ProtectedRoute exact path={"/services/:id"} component={ServicesEdit} />
       <Route path='/404' component={GenericNotFound} />
       <Redirect to='/404' />
     </Switch>

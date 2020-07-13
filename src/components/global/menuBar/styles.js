@@ -7,9 +7,19 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
   },
+  divRoot: {
+    flexGrow: 1,
+  },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     backgroundColor: colors.white,
+  },
+  link: {
+    flexGrow: 1,
+  },
+  linkHome: {
+    textDecoration: "none",
+    color: colors.primary,
   },
   drawer: {
     width: drawerWidth,

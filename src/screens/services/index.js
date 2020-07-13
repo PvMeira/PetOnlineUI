@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import PageDefault from "../../components/pageDefault";
+import PageDefault from "../../components/global/pageDefault";
 import ServicesListFilter from "./filter";
 import { listAll, search } from "../../services/ServicesService";
 import MUIDataTable from "mui-datatables";
@@ -9,7 +9,7 @@ import { formatCurrency } from "../../utils/Formater";
 import ApiToolTip from "../../components/global/toolTip/";
 import { toggleLoading } from "../../configuration/redux/reducers/application/application-actions";
 import { useDispatch } from "react-redux";
-import PaginationHelper from "../../components/pagination";
+import PaginationHelper from "../../components/global/pagination";
 import { useHistory } from "react-router-dom";
 
 const ServicesList = () => {

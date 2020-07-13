@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { findById } from "../../../services/ItemService";
-import PageDefault from "../../../components/pageDefault";
+import PageDefault from "../../../components/global/pageDefault";
 import { Formik } from "formik";
 import { Grid, TextField, Button } from "@material-ui/core";
 import { schema, schemaValidation } from "./formUtils";
 import { TextMaskCustomMoney } from "../../../utils/Formater";
-import UploadField from "../../../components/uploadField";
+import UploadField from "../../../components/global/uploadField";
 import {
   updateItem,
   listCategories,

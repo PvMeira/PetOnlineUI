@@ -50,6 +50,8 @@ const strings = {
     sales: "Sales",
     storage: "Storage",
     services: "Services",
+    logout: "Logout",
+    profile: "Profile",
   },
 };
 

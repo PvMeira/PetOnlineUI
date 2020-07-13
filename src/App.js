@@ -18,10 +18,9 @@ function App() {
           <PersistGate persistor={persistor}>
             <Loading />
             <SnackBar />
-            <ApiRoute />
-            {/* <MenuBar>
+            <MenuBar>
               <ApiRoute />
-            </MenuBar> */}
+            </MenuBar>
           </PersistGate>
         </BrowserRouter>
       </MuiThemeProvider>

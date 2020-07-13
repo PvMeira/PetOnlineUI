@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -20,6 +20,7 @@ import {
 } from "./styles";
 
 export default function MenuList() {
+  const [openSubMenu, setOpenSubMenu] = useState(false);
   const menus = [
     {
       id: 1,
@@ -69,16 +70,16 @@ export default function MenuList() {
               key={`menu-${index}`}
               button
               onClick={() => {
-                menus[index].isOpen = !menuItem.isOpen;
+                setOpenSubMenu(!openSubMenu);
               }}
             >
               <ListItemIconPrimary>{menuItem.icon}</ListItemIconPrimary>
               <ListItemTextSecondary primary={menuItem.name} />
-              {menuItem.isOpen ? <ExpandLess /> : <ExpandMore />}
+              {openSubMenu ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
 
             <Collapse
-              in={menus[index].isOpen}
+              in={openSubMenu}
               timeout='auto'
               unmountOnExit
               key={`colapse-${index}`}

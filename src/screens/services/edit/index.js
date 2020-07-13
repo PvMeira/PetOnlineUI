@@ -9,7 +9,7 @@ import {
 
 import { schema, schemaValidation } from "./formUtils";
 import { strings } from "../../../configuration/assets";
-import PageDefault from "../../../components/pageDefault";
+import PageDefault from "../../../components/global/pageDefault";
 import {
   FormContainer,
   GridTextAlignCenter,
