@@ -7,7 +7,10 @@ import { search } from "../../services/ItemService";
 import PaginationHelper from "../../components/global/pagination";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { toggleLoading } from "../../configuration/redux/reducers/application/application-actions";
+import {
+  toggleLoading,
+  toggleErrorMessage,
+} from "../../configuration/redux/reducers/application/application-actions";
 
 const ItemList = () => {
   const [items, setItems] = useState({ content: [], totalPages: 0 });
@@ -23,8 +26,12 @@ const ItemList = () => {
     dispatch(toggleLoading());
     setFilter(values);
     const { name } = values;
-    const response = await search(page, 4, name);
-    setItems(response);
+    await search(page, 4, name)
+      .then((response) => {
+        setItems(response.data);
+      })
+      .catch(() => dispatch(toggleErrorMessage("Unable to Load Items.")));
+
     dispatch(toggleLoading());
   };
 

@@ -14,14 +14,17 @@ import Copyright from "./coopyright";
 import useStyles from "./styles";
 import { strings } from "../../configuration/assets";
 import { Formik } from "formik";
-import { toggleAuthenticated } from "../../configuration/redux/reducers/login/login-actions";
+import { doLogin } from "../../configuration/redux/reducers/login/login-actions";
 import {
   toggleSuccessMessage,
   toggleErrorMessage,
+  toggleLoading,
 } from "../../configuration/redux/reducers/application/application-actions";
 import schemaValidation from "./formUtils";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+
+import { login } from "../../services/LoginService";
 
 const Login = () => {
   const classes = useStyles();
@@ -30,15 +33,19 @@ const Login = () => {
 
   const [form] = useState({ email: "", password: "" });
 
-  const doLogin = (values) => {
+  const submitLogin = async (values) => {
+    dispatch(toggleLoading());
     const { email, password } = values;
-    if (email === "teste@teste.com" && password === "root") {
-      history.push("/");
-      dispatch(toggleSuccessMessage(`Login sucessful !`));
-      dispatch(toggleAuthenticated());
-    } else {
-      dispatch(toggleErrorMessage("Invalid Email or Password."));
-    }
+    await login(email, password)
+      .then(({ data }) => {
+        dispatch(doLogin(data.token, data.username));
+        dispatch(toggleSuccessMessage(`Login sucessful !`));
+        history.push("/");
+      })
+      .catch(() => dispatch(toggleErrorMessage("Invalid Email or Password.")))
+      .finally(() => {
+        dispatch(toggleLoading());
+      });
   };
 
   return (
@@ -48,7 +55,7 @@ const Login = () => {
       validateOnBlur={true}
       validateOnMount={false}
       validationSchema={schemaValidation}
-      onSubmit={(values) => doLogin(values)}
+      onSubmit={(values) => submitLogin(values)}
     >
       {({
         values,

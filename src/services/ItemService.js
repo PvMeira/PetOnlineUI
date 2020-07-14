@@ -7,14 +7,9 @@ const paths = {
 };
 
 export const search = (page, size, name) => {
-  return api
-    .get(
-      `${paths.search}?page=${page}&size=${size} ${name ? "&name=" + name : ""}`
-    )
-    .then((response) => {
-      return response.data;
-    })
-    .catch(console.error);
+  return api.get(
+    `${paths.search}?page=${page}&size=${size} ${name ? "&name=" + name : ""}`
+  );
 };
 
 export const findById = (id) => {

@@ -10,8 +10,8 @@ import { strings, colors } from "../../../configuration/assets";
 import MenuList from "./menus";
 import { useSelector, useDispatch } from "react-redux";
 import { isAuthenticated } from "../../../configuration/redux/reducers/login/login-selector";
-import { toggleAuthenticated } from "../../../configuration/redux/reducers/login/login-actions";
-import { IconButton, Menu, MenuItem } from "@material-ui/core";
+import { doLogout } from "../../../configuration/redux/reducers/login/login-actions";
+import { IconButton, Menu, MenuItem, Grid } from "@material-ui/core";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 
 export default function MenuBar(props) {
@@ -31,56 +31,58 @@ export default function MenuBar(props) {
   };
 
   const handleLogout = () => {
-    dispatch(toggleAuthenticated());
-    history.push("/login");
+    dispatch(doLogout());
+    history.push("/");
   };
 
   return isAuth ? (
-    <div className={classes.divRoot}>
+    <div className={classes.root}>
       <CssBaseline />
       <AppBar position='fixed' className={classes.appBar}>
         <Toolbar>
-          <Typography variant='h6' className={classes.link}>
-            <Link to={"/"} className={classes.linkHome}>
-              {strings.menu.appName}
-            </Link>
-          </Typography>
-          <div style={{ color: colors.primary }}>
-            <IconButton
-              aria-label='account of current user'
-              aria-controls='menu-appbar'
-              aria-haspopup='true'
-              onClick={handleMenu}
-              color='inherit'
-            >
-              <AccountCircle />
-            </IconButton>
-            <Menu
-              id='menu-appbar'
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={open}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={() => history.push("/profile")}>
-                {strings.menu.profile}
-              </MenuItem>
-              <MenuItem onClick={() => handleLogout()}>
-                {strings.menu.logout}
-              </MenuItem>
-            </Menu>
-          </div>
+          <Grid container direction='row' justify='space-around'>
+            <Grid item xs={6}>
+              <Typography variant='h6' noWrap>
+                <Link
+                  to={"/"}
+                  style={{ textDecoration: "none", color: colors.primary }}
+                >
+                  {strings.menu.appName}
+                </Link>
+              </Typography>
+            </Grid>
+            <Grid item xs={6} style={{ textAlign: "end" }}>
+              <IconButton
+                aria-label='account of current user'
+                aria-controls='menu-appbar'
+                aria-haspopup='true'
+                onClick={handleMenu}
+                style={{ color: colors.primary }}
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id='menu-appbar'
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={open}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              </Menu>
+            </Grid>
+          </Grid>
         </Toolbar>
       </AppBar>
-
       <Drawer
         className={classes.drawer}
         variant='permanent'
@@ -99,6 +101,6 @@ export default function MenuBar(props) {
       </main>
     </div>
   ) : (
-    <div>{props.children}</div>
+    <div className={classes.root}>{props.children}</div>
   );
 }
