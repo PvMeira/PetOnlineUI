@@ -7,7 +7,7 @@ import loginReducer from "./reducers/login/login-reducer";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: [],
+  whitelist: ["login"],
 };
 
 const rootReducer = combineReducers({
