@@ -7,6 +7,7 @@ import { search } from "../../services/ItemService";
 import PaginationHelper from "../../components/global/pagination";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { primaryPaths } from "../../configuration/core/route/Address";
 import {
   toggleLoading,
   toggleErrorMessage,
@@ -40,7 +41,7 @@ const ItemList = () => {
   };
 
   const onClickCard = (id) => {
-    history.push(`/storage/${id}`);
+    history.push(`${primaryPaths.storage}/${id}`);
   };
   return (
     <PageDefault title='Items'>

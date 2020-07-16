@@ -10,6 +10,8 @@ import ApiToolTip from "../../components/global/toolTip/";
 import { toggleLoading } from "../../configuration/redux/reducers/application/application-actions";
 import { useDispatch } from "react-redux";
 import PaginationHelper from "../../components/global/pagination";
+import { primaryPaths } from "../../configuration/core/route/Address";
+
 import { useHistory } from "react-router-dom";
 
 const ServicesList = () => {
@@ -88,7 +90,9 @@ const ServicesList = () => {
             <IconButton
               onClick={() =>
                 history.push(
-                  `services/${services.content[tableMeta.rowIndex].id}`
+                  `${primaryPaths.services}/${
+                    services.content[tableMeta.rowIndex].id
+                  }`
                 )
               }
             >

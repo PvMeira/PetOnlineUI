@@ -19,6 +19,8 @@ import {
   toggleSuccessMessage,
   toggleErrorMessage,
 } from "../../../configuration/redux/reducers/application/application-actions";
+import { primaryPaths } from "../../../configuration/core/route/Address";
+
 import { strings } from "../../../configuration/assets";
 
 const ItemEdit = ({ isEdit = true }) => {
@@ -57,7 +59,7 @@ const ItemEdit = ({ isEdit = true }) => {
           dispatch(
             toggleSuccessMessage(`The item ${name} was successful edited.`)
           );
-          history.push("/storage");
+          history.push(primaryPaths.storage);
         })
         .catch((error) => {
           dispatch(toggleErrorMessage(strings.defaultMessages.error));
@@ -73,7 +75,7 @@ const ItemEdit = ({ isEdit = true }) => {
       })
         .then((response) => {
           dispatch(toggleSuccessMessage(strings.defaultMessages.success));
-          history.push("/storage");
+          history.push(primaryPaths.storage);
         })
         .catch((error) => {
           dispatch(toggleErrorMessage(strings.defaultMessages.error));

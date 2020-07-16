@@ -4,6 +4,7 @@ import { Formik } from "formik";
 import { initialSchema } from "../formUtils";
 import { useHistory } from "react-router-dom";
 import { strings } from "../../../configuration/assets";
+import { paths } from "../../../configuration/core/route/Address";
 
 const ItemListFilter = ({ onSubmitFunction }) => {
   const history = useHistory();
@@ -81,7 +82,7 @@ const ItemListFilter = ({ onSubmitFunction }) => {
                   variant='contained'
                   size='large'
                   color='secondary'
-                  onClick={() => history.push(`/storage/new`)}
+                  onClick={() => history.push(`${paths.storage.new}`)}
                 >
                   {strings.defualtButtons.new}
                 </Button>

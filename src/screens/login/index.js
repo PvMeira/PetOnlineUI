@@ -23,6 +23,7 @@ import {
 import schemaValidation from "./formUtils";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { primaryPaths } from "../../configuration/core/route/Address";
 
 import { login } from "../../services/LoginService";
 
@@ -40,7 +41,7 @@ const Login = () => {
       .then(({ data }) => {
         dispatch(doLogin(data.token, data.username));
         dispatch(toggleSuccessMessage(`Login sucessful !`));
-        history.push("/");
+        history.push(primaryPaths.home);
       })
       .catch(() => dispatch(toggleErrorMessage("Invalid Email or Password.")))
       .finally(() => {

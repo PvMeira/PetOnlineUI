@@ -23,6 +23,8 @@ import {
   Switch,
   FormControlLabel,
 } from "@material-ui/core";
+import { primaryPaths } from "../../../configuration/core/route/Address";
+
 import { TextMaskCustomMoney } from "../../../utils/Formater";
 
 const ServicesEdit = ({ isEdit = true }) => {
@@ -61,7 +63,7 @@ const ServicesEdit = ({ isEdit = true }) => {
           dispatch(
             toggleSuccessMessage(`The Service ${name} was successful edited.`)
           );
-          history.push("/services");
+          history.push(primaryPaths.services);
         })
         .catch(() => {
           dispatch(toggleErrorMessage(strings.defaultMessages.error));
@@ -75,7 +77,7 @@ const ServicesEdit = ({ isEdit = true }) => {
       })
         .then(() => {
           dispatch(toggleSuccessMessage(strings.defaultMessages.success));
-          history.push("/services");
+          history.push(primaryPaths.services);
         })
         .catch(() => {
           dispatch(toggleErrorMessage(strings.defaultMessages.error));
@@ -197,7 +199,7 @@ const ServicesEdit = ({ isEdit = true }) => {
                     variant='outlined'
                     size='large'
                     color='secondary'
-                    onClick={() => history.push("/services")}
+                    onClick={() => history.push(primaryPaths.services)}
                   >
                     {strings.defualtButtons.back}
                   </Button>

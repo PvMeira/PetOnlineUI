@@ -12,6 +12,10 @@ import StorageIcon from "@material-ui/icons/Storage";
 import SettingsIcon from "@material-ui/icons/Settings";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import {
+  paths,
+  primaryPaths,
+} from "../../../../configuration/core/route/Address";
+import {
   ListItemIconPrimary,
   CustomLink,
   ListItemTextSecondary,
@@ -26,14 +30,14 @@ export default function MenuList() {
       id: 1,
       name: strings.menu.home,
       icon: <HomeOutlinedIcon />,
-      url: "/",
+      url: primaryPaths.home,
       isSubMenu: false,
     },
     {
       id: 2,
       name: strings.menu.sales,
       icon: <MonetizationOnIcon />,
-      url: "/sales",
+      url: paths.sales.index,
       isSubMenu: false,
     },
     {
@@ -47,14 +51,14 @@ export default function MenuList() {
           id: 4,
           name: strings.menu.storage,
           icon: <StorageIcon />,
-          url: "/storage",
+          url: primaryPaths.storage,
           isSubMenu: false,
         },
         {
           id: 5,
           name: strings.menu.services,
           icon: <AssignmentIcon />,
-          url: "/services",
+          url: primaryPaths.services,
           isSubMenu: false,
         },
       ],

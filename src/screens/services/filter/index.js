@@ -3,6 +3,7 @@ import { Grid, TextField, Button } from "@material-ui/core";
 import { Formik } from "formik";
 import { useHistory } from "react-router-dom";
 import { strings } from "../../../configuration/assets";
+import { paths } from "../../../configuration/core/route/Address";
 
 const ServicesListFilter = ({ onSubmitFunction }) => {
   const history = useHistory();
@@ -65,7 +66,7 @@ const ServicesListFilter = ({ onSubmitFunction }) => {
                   variant='contained'
                   size='large'
                   color='secondary'
-                  onClick={() => history.push(`/services/new`)}
+                  onClick={() => history.push(`${paths.services.new}`)}
                 >
                   {strings.defualtButtons.new}
                 </Button>
