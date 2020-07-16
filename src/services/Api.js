@@ -22,7 +22,7 @@ customAxios.interceptors.response.use(
   },
   function (error) {
     if (error.response) {
-      if (error.response.status == 403) {
+      if (error.response.status === 403) {
         store.dispatch(
           toggleErrorMessage("You access has expired, please login again.")
         );
